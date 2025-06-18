@@ -1,0 +1,6 @@
+pandas
+sqlalchemy
+paramiko
+numpy
+datetime
+boto3
