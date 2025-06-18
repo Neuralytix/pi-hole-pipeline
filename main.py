@@ -32,7 +32,7 @@ username = 'batman'
 password = 'batman'
 
 remote_backup = '/home/batman/Downloads/pihole.db.backup'
-local_copy = 'f:/SSH/pihole.db.backup'
+local_copy = '/home/kratos/dockers/pihole.db.backup'
 
 backup_cmd = 'sudo sqlite3 /etc/pihole/pihole-FTL.db ".backup /home/batman/Downloads/pihole.db.backup"'
 
@@ -57,10 +57,10 @@ print("✅ Backup file copied successfully.")
 
 cred = 'postgresql://ashwany:limit7841@192.168.18.61:5432/pi-hole-bi'
 engine = create_engine(cred)
-db = sqlite3.connect(r'f:\SSH\pihole.db.backup')
+db = sqlite3.connect(r'/home/kratos/dockers/')
 db_cur= db.cursor()
 
-file = r'c:\Users\Batman\Documents\Pihole_DB.xlsx'
+file = r'/home/kratos/dockers/Pihole_DB.xlsx'
 
 def read_excel_file(file_path, sheet):
     xls = pd.read_excel(file_path, sheet_name=sheet)
@@ -156,13 +156,13 @@ for row in db_cur.execute('SELECT * FROM client_by_id'):
 client_by_id = pd.DataFrame(client_by_id)
 client_by_id =  client_by_id.rename(columns={0:'id', 1:'client'})
 client_by_id = client_by_id.drop(2, axis=1)
-clients = pd.read_csv(r'F:/client.csv')
+clients = pd.read_csv(r'/home/kratos/dockers/client.csv')
 if len(client_by_id) == len(clients):
     print('Client IDs are same.')
 else:
     print('New Client IDs found.')
 
-client_by_id.to_csv(r'F:\client1.csv', index=False)
+client_by_id.to_csv(r'/home/kratos/dockers/client1.csv', index=False)
 client_by_id = client_by_id.merge(clients, on='id', how='left')
 client_by_id.drop_duplicates('client', inplace=True,keep='last')
 
